@@ -85,7 +85,7 @@
                         <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
                                     class="fa fa-home me-2"></i> My Dashboard</small></a>
                         <div class="dropdown-menu rounded">
-                            <a href="#" class="dropdown-item"> Login</a>
+                            <a href="${pageContext.request.contextPath}/login" class="dropdown-item"> Login</a>
                             <a href="#" class="dropdown-item"> Wishlist</a>
                             <a href="#" class="dropdown-item"> My Card</a>
                             <a href="#" class="dropdown-item"> Notifications</a>
