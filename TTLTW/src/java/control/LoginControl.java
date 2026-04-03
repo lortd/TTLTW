@@ -1,13 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package control;
 
 import dao.DAO;
-import entity.CartItemDTO;
-import entity.Category;
-import entity.Product;
+import entity.Account;
 import entity.User;
 
 import java.io.IOException;
-import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,8 +17,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet(name = "CartControl", urlPatterns = {"/cart"})
-public class CartControl extends HttpServlet {
+/**
+ *
+ * @author trinh
+ */
+@WebServlet(name = "LoginControl", urlPatterns = {"/login"})
+public class LoginControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,23 +36,20 @@ public class CartControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        User acc = (User) session.getAttribute("acc");
-
-        if (acc == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-        int userId = acc.getUserId(); 
+        String username = request.getParameter("user");
+        String password = request.getParameter("pass");
         DAO dao = new DAO();
-        List<CartItemDTO> list = dao.getCartItemsByUserId(userId);
-        try {
-        	request.setAttribute("cartList", list);
-            request.getRequestDispatcher("cart.jsp").forward(request, response);
-            
-        } catch (Exception e) {
+        User a = dao.login(username, password);
+        if (a == null) {
+            request.setAttribute("mess", "Wrong user or pass");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("acc", a);
+            session.setMaxInactiveInterval(99000);
             response.sendRedirect("home");
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -86,6 +89,6 @@ public class CartControl extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

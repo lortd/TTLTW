@@ -1,13 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package control;
 
-import dao.DAO;
-import entity.CartItemDTO;
-import entity.Category;
-import entity.Product;
-import entity.User;
-
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,8 +14,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet(name = "CartControl", urlPatterns = {"/cart"})
-public class CartControl extends HttpServlet {
+/**
+ *
+ * @author trinh
+ */
+@WebServlet(name = "LogOutControl", urlPatterns = {"/logout"})
+public class LogOutControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,22 +34,8 @@ public class CartControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        User acc = (User) session.getAttribute("acc");
-
-        if (acc == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-        int userId = acc.getUserId(); 
-        DAO dao = new DAO();
-        List<CartItemDTO> list = dao.getCartItemsByUserId(userId);
-        try {
-        	request.setAttribute("cartList", list);
-            request.getRequestDispatcher("cart.jsp").forward(request, response);
-            
-        } catch (Exception e) {
-            response.sendRedirect("home");
-        }
+        session.removeAttribute("acc");
+        response.sendRedirect("home");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -86,6 +75,6 @@ public class CartControl extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

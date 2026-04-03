@@ -1,45 +1,67 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
-/**
- *
- * @author trinh
- */
+import java.sql.Timestamp;
+
 public class Category {
-    private int cid;
-    private String cname;
+	private int categoryId;
+	private String name;
+	private String description;
+	private Integer parentId;
+	private Timestamp createdAt;
 
-    public Category() {
-    }
+	public Category() {
+	}
 
-    public Category(int cid, String cname) {
-        this.cid = cid;
-        this.cname = cname;
-    }
+	public Category(int categoryId, String name, String description, Integer parentId, Timestamp createdAt) {
+		this.categoryId = categoryId;
+		this.name = name;
+		this.description = description;
+		this.parentId = parentId;
+		this.createdAt = createdAt;
+	}
 
-    public int getCid() {
-        return cid;
-    }
+	public int getCategoryId() {
+		return categoryId;
+	}
 
-    public void setCid(int cid) {
-        this.cid = cid;
-    }
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
 
-    public String getCname() {
-        return cname;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setCname(String cname) {
-        this.cname = cname;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    @Override
-    public String toString() {
-        return "Category{" + "cid=" + cid + ", cname=" + cname + '}';
-    }
-    
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	@Override
+	public String toString() {
+		return "Category [categoryId=" + categoryId + ", name=" + name + ", parentId=" + parentId + "]";
+	}
 }
