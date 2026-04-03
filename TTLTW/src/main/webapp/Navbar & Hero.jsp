@@ -61,19 +61,19 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav ms-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
+                            <a href="index.jsp" class="nav-item nav-link active">Home</a>
+                            <a href="shop.jsp" class="nav-item nav-link">Shop</a>
                             <a href="single.jsp" class="nav-item nav-link">Single Page</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0">
-                                    <a href="bestseller.html" class="dropdown-item">Bestseller</a>
-                                    <a href="cart.html" class="dropdown-item">Cart Page</a>
+                                    <a href="bestseller.jsp" class="dropdown-item">Bestseller</a>
+                                    <a href="cart" class="dropdown-item">Cart Page</a>
                                     <a href="checkout.jsp" class="dropdown-item">Checkout</a>
-                                    <a href="404.html" class="dropdown-item">404 Page</a>
+                                    <a href="404.jsp" class="dropdown-item">404 Page</a>
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link me-2">Contact</a>
+                            <a href="contact.jsp" class="nav-item nav-link me-2">Contact</a>
                             <div class="nav-item dropdown d-block d-lg-none mb-3">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">All Category</a>
                                 <div class="dropdown-menu m-0">

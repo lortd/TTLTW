@@ -5,81 +5,82 @@
  */
 package entity;
 
-/**
- *
- * @author trinh
- */
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import java.util.Date; // Sử dụng thư viện này
+
 public class Product {
-    private int id;
+    private int productId;
     private String name;
-    private String image;
-    private double price;
-    private String title;
     private String description;
+    private int categoryId;
+    private String imageUrl;
+    private BigDecimal price;
+    private int quantity;
+    private String status;
+    private Date createdAt; // Đổi sang Date
+    private Date updatedAt; // Đổi sang Date
 
     public Product() {
     }
 
-    public Product(int id, String name, String image, double price, String title, String description) {
-        this.id = id;
+    // Constructor đủ 10 tham số theo đúng thứ tự SQL
+    public Product(int productId, String name, String description, int categoryId, 
+                   String imageUrl, BigDecimal price, int quantity, String status, 
+                   Date createdAt, Date updatedAt) {
+        this.productId = productId;
         this.name = name;
-        this.image = image;
-        this.price = price;
-        this.title = title;
         this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
+        this.categoryId = categoryId;
+        this.imageUrl = imageUrl;
         this.price = price;
+        this.quantity = quantity;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public String getTitle() {
-        return title;
-    }
+    // ... Getters và Setters giữ nguyên ...
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
-    public String getDescription() {
-        return description;
-    }
+    // Getters và Setters
+    public int getProductId() { return productId; }
+    public void setProductId(int productId) { this.productId = productId; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    @Override
-    public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", image=" + image + ", price=" + price + ", title=" + title + ", description=" + description + '}';
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    public int getCategoryId() { return categoryId; }
+    public void setCategoryId(int categoryId) { this.categoryId = categoryId; }
+
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
+
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
+
+    public Date getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", name=" + name + ", description=" + description + ", categoryId="
+				+ categoryId + ", imageUrl=" + imageUrl + ", price=" + price + ", quantity=" + quantity + ", status="
+				+ status + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+	}
+    
     
 }

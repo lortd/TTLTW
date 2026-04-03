@@ -27,13 +27,6 @@ public class ShopControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         DAO dao = new DAO();
-        List<Product> list = dao.getTop6();
-        List<Category> listC = dao.getAllCategory();
-        Product last = dao.getLast();
-        
-        request.setAttribute("listP", list);
-        request.setAttribute("listCC", listC);
-        request.setAttribute("p", last);
         request.getRequestDispatcher("shop.jsp").forward(request, response);
     }
 
