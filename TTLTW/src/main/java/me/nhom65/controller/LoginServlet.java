@@ -1,6 +1,7 @@
 package me.nhom65.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -42,10 +43,17 @@ public class LoginServlet extends HttpServlet {
     
     if (user != null) {
     	if(user.getPasswordHash().equals(password)) {
-    		HttpSession session = request.getSession(true);
-            session.setAttribute("currentUser", user);
-            response.sendRedirect(request.getContextPath() + "/home");
-            return;
+    		if(userService.isUnActiveOtp(username, "REGISTER")) {
+    			HttpSession session = request.getSession(true);
+                session.setAttribute("email", user.getEmail());
+    			response.sendRedirect("otp");
+            	return;
+    		} else {
+    			HttpSession session = request.getSession(true);
+            	session.setAttribute("currentUser", user);
+            	response.sendRedirect(request.getContextPath() + "/home");
+            	return;
+    		}
     	} 
     }
     request.setAttribute("error", "Sai username hoặc password");

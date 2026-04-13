@@ -3,15 +3,12 @@ package me.nhom65.controller.admin;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+public class AdminCategoryServlet extends HttpServlet {
 
-@WebServlet("/admin/dashboard")
-public class AdminDashboardServlet extends HttpServlet {
-	
 	/**
 	 * 
 	 */
@@ -23,12 +20,11 @@ public class AdminDashboardServlet extends HttpServlet {
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getServletContext().getRequestDispatcher("/admin/dashboard.jsp").forward(request, response);
+		request.getServletContext().getRequestDispatcher("/admin/admin_category.jsp").forward(request, response);
 	}
 //	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		doGet(request,response);
 //	}
 	
 
-	
 }

@@ -2,29 +2,9 @@ package me.nhom65.util;
 
 import java.util.Properties;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-
 public class JavaMail {
 	
-	private static Context context;
-
-    static {
-        try {
-            context = (Context) new InitialContext()
-                    .lookup("java:comp/env");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static String get(String name) {
-        try {
-            return (String) context.lookup(name);
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot load JNDI: " + name);
-        }
-    }
+	
     
 	public static Properties getMailProperties() {
         Properties props = new Properties();
@@ -37,10 +17,10 @@ public class JavaMail {
     }
 
     public static String getUsername() {
-        return get("MAIL_USERNAME");
+        return ContextServer.get("MAIL_USERNAME");
     }
 
     public static String getPassword() {
-        return get("MAIL_PASSWORD"); 
+        return ContextServer.get("MAIL_PASSWORD"); 
     }
 }

@@ -242,7 +242,7 @@ body {
 		<div class="auth-card">
 
 			<div class="auth-header">
-				<span class="auth-brand">WEB BÁN SÁCH</span>
+				<span class="auth-brand">WEB BÁN THUỐC THỰC VẬT</span>
 				<h1 class="auth-title">Đăng ký</h1>
 				<p class="auth-sub">Tạo tài khoản mới để sử dụng hệ thống</p>
 			</div>

@@ -1,13 +1,19 @@
 package me.nhom65.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import me.nhom65.model.User;
+import me.nhom65.service.MailService;
 import me.nhom65.service.UserService;
+import me.nhom65.util.UserValidcator;
+import me.nhom65.util.UserValidcator.ResultValidcator;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
@@ -41,33 +47,26 @@ public class RegisterServlet extends HttpServlet {
         String address = request.getParameter("address");
 
         request.setAttribute("username", username);
-
-        if(!validInput(username,password,confirmPassword,gmail,phone,address)) {
-        	  request.setAttribute("error", "Đang bị thiếu thông tin");
-        	  request.getRequestDispatcher("/register.jsp").forward(request, response);
-        	  return;
-        }
-        if (userService.addUser(username,password,confirmPassword,gmail,phone,address)) {
-            response.sendRedirect(request.getContextPath() + "/login");
+        User check = userService.getUserByName(username);
+        ResultValidcator rs = UserValidcator.checkRegister(check, username, password, confirmPassword, gmail, phone, address);
+        
+        if(!rs.isSuccess()) {
+        	request.setAttribute("error", rs.getMessage());
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
             return;
         }
-
-        // Đăng ký thất bại -> forward lại + hiển thị lỗi
+        if (userService.addUser(username,password,confirmPassword,gmail,phone,address)) {
+        	userService.createOtp(username,"REGISTER", LocalDateTime.now().plusMinutes(15));
+        	HttpSession session = request.getSession(true);
+            session.setAttribute("email", gmail);
+			response.sendRedirect("otp");
+        	return;
+        } 
         request.setAttribute("error", "Lỗi đăng ký thất bại");
         request.getRequestDispatcher("/register.jsp").forward(request, response);
     }
 
-	private boolean validInput(String username, String password, String confirmPassword, String gmail, String phone,
-			String address) {
-		if (username == null || password == null || confirmPassword == null || gmail == null || phone == null || address == null) {
-			return false;
-		}
-		if(!password.equals(confirmPassword)) {
-			return false;
-		}
-		return true;
-	}
-	
+
 
 	
 }

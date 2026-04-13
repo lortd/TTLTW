@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,13 +86,14 @@
                         <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
                                     class="fa fa-home me-2"></i> My Dashboard</small></a>
                         <div class="dropdown-menu rounded">
-                            <a href="${pageContext.request.contextPath}/login" class="dropdown-item"> Login</a>
-                            <a href="#" class="dropdown-item"> Wishlist</a>
-                            <a href="#" class="dropdown-item"> My Card</a>
-                            <a href="#" class="dropdown-item"> Notifications</a>
-                            <a href="#" class="dropdown-item"> Account Settings</a>
-                            <a href="#" class="dropdown-item"> My Account</a>
-                            <a href="#" class="dropdown-item"> Log Out</a>
+                        	<c:if test="${empty currentUser}">
+								<a href="${pageContext.request.contextPath}/login" class="dropdown-item"> Login</a>
+							</c:if>
+                           
+                            <a href="${pageContext.request.contextPath}/admin/dashboard" class="dropdown-item"> Admin Dashboard</a>
+                            <c:if test="${not empty currentUser}">
+								<a href="${pageContext.request.contextPath}/logout" class="dropdown-item"> Log Out</a>
+							</c:if>
                         </div>
                     </div>
                 </div>

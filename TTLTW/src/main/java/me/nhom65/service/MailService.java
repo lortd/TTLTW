@@ -57,4 +57,15 @@ public class MailService {
 //		        """.formatted(password);
 //		  sendEmail(email,subject,content);
 //	}
+	
+	public void sendOTP(String email, String otp) {
+	 if(email.isBlank()) return;
+	 String subject = "Gửi mã OTP";
+	 String content = """
+	            <h3>Chào bạn,</h3>
+	            <p>Mã otp của bạn là:</p>
+	            <a>%s</a>
+	        """.formatted(otp);
+	  sendEmail(email,subject,content);
+}
 }

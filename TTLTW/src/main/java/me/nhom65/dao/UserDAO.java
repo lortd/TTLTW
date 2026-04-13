@@ -179,5 +179,40 @@ public class UserDAO {
 		}
 	}
 
+
+	public User findByEmail(String email) {
+		Connection conn = null;
+		try  {
+			conn = DatabaseConnection.getConnection();
+			String sql = "SELECT * FROM users WHERE email = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					int userid = rs.getInt("user_id");
+					String uname = rs.getString("username");
+					String pass = rs.getString("password_hash");
+					String emailfound = rs.getString("email");
+					String phone = rs.getString("phone");
+					String address = rs.getString("address");
+					int role = rs.getInt("role_id");
+					Timestamp createAt = rs.getTimestamp("created_at"); 
+					return new User(userid, uname, pass,emailfound, phone, address, role, createAt);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return null;
+	}
+
 	
 }
